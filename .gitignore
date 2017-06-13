@@ -1,8 +1,4 @@
-/blib/
-/Makefile
-/Makefile.old
-/pm_to_blib
-/Date-Extract-*
-*.bak
-*.swp
-/MYMETA.*
+Date-Extract-*
+.build
+*~
+nytprof*
