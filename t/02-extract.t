@@ -1,7 +1,7 @@
 #!perl -T
 use strict;
 use warnings;
-use Test::More tests => 50;
+use Test::More tests => 50+2;
 use Test::MockTime 'set_fixed_time';
 use Date::Extract::PERLANCAR;
 
@@ -9,6 +9,14 @@ use Date::Extract::PERLANCAR;
 set_fixed_time('2007-08-03T05:36:52Z');
 
 my $parser = Date::Extract::PERLANCAR->new(prefers => 'future', time_zone => 'America/New_York');
+
+sub extract_is0 {
+    my ($in, $expected) = @_;
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+
+    my $dt = $parser->extract($in);
+    is("$dt", $expected, "extracts '$in' to $expected");
+}
 
 sub extract_is {
     my ($in, $expected) = @_;
@@ -58,3 +66,6 @@ extract_is("next friday"    => "2007-08-10");
 extract_is("next saturday"  => "2007-08-11");
 extract_is("next sunday"    => "2007-08-12");
 # }}}
+
+extract_is0("2017-06-13 11:22:33" => "2017-06-13T11:22:33");
+extract_is0("2017-06-13T11:22:33" => "2017-06-13T11:22:33");

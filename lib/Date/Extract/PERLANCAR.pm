@@ -118,6 +118,7 @@ sub _build_regex {
     my $month_day         = "(?:$month\\s*$monthday)";
     my $day_month_year    = "(?:(?:$day_month|$month_day)\\s*,?\\s*\\d\\d\\d\\d)";
 
+    my $yyyymmdd_hhmmss   = "(?:\\d\\d\\d\\d[-/]\\d\\d[-/]\\d\\d)[T ](?:\\d\\d):(?:\\d\\d):(?:\\d\\d)";
     my $yyyymmdd          = "(?:\\d\\d\\d\\d[-/]\\d\\d[-/]\\d\\d)";
     my $ddmmyy            = "(?:\\d\\d[-/]\\d\\d[-/]\\d\\d)";
     my $ddmmyyyy          = "(?:\\d\\d[-/]\\d\\d[-/]\\d\\d\\d\\d)";
@@ -134,6 +135,7 @@ sub _build_regex {
           | $day_month_year   # November 13th, 1986
           | $day_month        # November 13th
           | $month_day        # 13 Nov
+          | $yyyymmdd_hhmmss  # 1986-11-13T00:12:34 or 1986-11-13 00:12:34
           | $yyyymmdd         # 1986/11/13
           | $ddmmyy           # 11-13-86
           | $ddmmyyyy         # 11-13-1986
@@ -243,6 +245,21 @@ sub _extract {
     my $dt = $parser->extract($arbitrary_text)
         or die "No date found.";
     return $dt->ymd;
+
+=head1 DESCRIPTION
+
+This is a temporary fork of L<Date::Extract> (last updated at 0.06) to add
+features that I need. The features will eventually be merged into Date::Extract.
+Currently it adds:
+
+=over
+
+=item * Add 'combined' format
+
+=item * Recognize yyyy-mm-ddThh:mm:ss in addition to yyyy-mm-dd
+
+=back
+
 
 =head1 MOTIVATION
 
