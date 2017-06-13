@@ -3,12 +3,12 @@ use strict;
 use warnings;
 use Test::More tests => 50;
 use Test::MockTime 'set_fixed_time';
-use Date::Extract;
+use Date::Extract::PERLANCAR;
 
 # a Friday. The time I wrote this line of code, in fact (in UTC)
 set_fixed_time('2007-08-03T05:36:52Z');
 
-my $parser = Date::Extract->new(prefers => 'future', time_zone => 'America/New_York');
+my $parser = Date::Extract::PERLANCAR->new(prefers => 'future', time_zone => 'America/New_York');
 
 sub extract_is {
     my ($in, $expected) = @_;
@@ -58,4 +58,3 @@ extract_is("next friday"    => "2007-08-10");
 extract_is("next saturday"  => "2007-08-11");
 extract_is("next sunday"    => "2007-08-12");
 # }}}
-

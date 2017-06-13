@@ -1,11 +1,15 @@
-package Date::Extract;
+package Date::Extract::PERLANCAR;
+
+# DATE
+# VERSION
+
+use 5.010001;
 use strict;
 use warnings;
+
 use DateTime::Format::Natural;
 use List::Util 'reduce';
 use parent 'Class::Data::Inheritable';
-
-our $VERSION = '0.06';
 
 __PACKAGE__->mk_classdata($_) for qw/scalar_downgrade handlers regex/;
 
@@ -233,15 +237,9 @@ sub _extract {
 
 1;
 
-__END__
-
-=head1 NAME
-
-Date::Extract - extract probable dates from strings
-
 =head1 SYNOPSIS
 
-    my $parser = Date::Extract->new();
+    my $parser = Date::Extract::PERLANCAR->new();
     my $dt = $parser->extract($arbitrary_text)
         or die "No date found.";
     return $dt->ymd;
@@ -262,7 +260,7 @@ set to 2019. This is what your users would probably expect.
 
 =head1 METHODS
 
-=head2 new PARAMHASH => C<Date::Extract>
+=head2 new PARAMHASH => C<Date::Extract::PERLANCAR>
 
 =head3 arguments
 
@@ -362,8 +360,8 @@ arguments passed into this method will trump those from the constructor.
 
 You may reuse a parser for multiple calls to C<extract>.
 
-You do not need to have an instantiated C<Date::Extract> object to call this
-method. Just C<< Date::Extract->extract($foo) >> will work.
+You do not need to have an instantiated C<Date::Extract::PERLANCAR> object to
+call this method. Just C<< Date::Extract::PERLANCAR->extract($foo) >> will work.
 
 =head1 FORMATS HANDLED
 
@@ -398,7 +396,7 @@ here.
 
 L<DateTime::Format::Natural>, L<Time::ParseDate>, L<Date::Manip>
 
-=head1 AUTHOR
+=head1 ORIGINAL AUTHOR
 
 Shawn M Moore, C<< <sartak at bestpractical dot com> >>
 
@@ -407,7 +405,7 @@ Shawn M Moore, C<< <sartak at bestpractical dot com> >>
 Thanks to Steven Schubiger for writing the fine L<DateTime::Format::Natural>.
 We still use it, but it doesn't quite fill all the particular needs we have.
 
-=head1 COPYRIGHT & LICENSE
+=head1 ORIGINAL COPYRIGHT & LICENSE
 
 Copyright 2007-2009 Best Practical Solutions.
 
@@ -415,4 +413,3 @@ This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl itself.
 
 =cut
-

@@ -2,7 +2,7 @@
 use strict;
 use warnings;
 use Test::More;
-use Date::Extract;
+use Date::Extract::PERLANCAR;
 
 my %formats = (
     'today'    =>
@@ -69,7 +69,7 @@ while (my ($input, $checker) = each %formats) {
     TODO: {
         local $TODO = $checker->{'TODO'} if $checker->{'TODO'};
 
-        my $got = Date::Extract->extract($input);
+        my $got = Date::Extract::PERLANCAR->extract($input);
         ok($got, "got a date out of $input");
 
         unless ($got) {
@@ -82,4 +82,3 @@ while (my ($input, $checker) = each %formats) {
         $checker->{'test'}->();
     }
 }
-

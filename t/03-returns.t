@@ -3,14 +3,14 @@ use strict;
 use warnings;
 use Test::More tests => 17;
 use Test::MockTime 'set_fixed_time';
-use Date::Extract;
+use Date::Extract::PERLANCAR;
 
 # a Thursday. The time I wrote this line of code, in fact (in UTC)
 set_fixed_time('2007-11-16T02:48:52Z');
 
 my $in = "Today I see a boat. Tomorrow I'll see another. Yesterday I swam.";
 
-my $parser = Date::Extract->new(time_zone => 'UTC');
+my $parser = Date::Extract::PERLANCAR->new(time_zone => 'UTC');
 my $dt = $parser->extract($in);
 is($dt->ymd, '2007-11-16', 'default: returns first date, today');
 
@@ -45,4 +45,3 @@ is($dt->ymd, '2007-11-15', 'scalar all_cron: only date out was yesterday');
 
 $dt = $parser->extract($in, returns => 'all');
 is($dt->ymd, '2007-11-16', 'scalar all: only date out was today');
-
