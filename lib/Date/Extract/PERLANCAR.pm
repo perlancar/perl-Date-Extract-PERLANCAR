@@ -238,6 +238,7 @@ sub _extract {
 }
 
 1;
+# ABSTRACT: Extract probable dates from strings
 
 =head1 SYNOPSIS
 
