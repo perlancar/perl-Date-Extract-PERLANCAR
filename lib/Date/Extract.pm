@@ -5,7 +5,7 @@ use DateTime::Format::Natural;
 use List::Util 'reduce';
 use parent 'Class::Data::Inheritable';
 
-our $VERSION = '0.05';
+our $VERSION = '0.06';
 
 __PACKAGE__->mk_classdata($_) for qw/scalar_downgrade handlers regex/;
 
@@ -278,7 +278,7 @@ string in the text]).
 
 =item time_zone
 
-Only relevant when C,format> is set to "DateTime".
+Only relevant when C<format> is set to "DateTime".
 
 Forces a particular time zone to be set (this actually matters, as "tomorrow"
 on Monday at 11 PM means something different than "tomorrow" on Tuesday at 1
